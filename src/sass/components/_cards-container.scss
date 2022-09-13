@@ -1,0 +1,9 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14.375rem, 1fr));
+  gap: 2rem 1rem;
+
+  @include respond(xs) {
+    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  }
+}

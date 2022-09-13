@@ -1,0 +1,55 @@
+.page-container {
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  &__aside {
+    padding-top: 2rem;
+    width: 0;
+    transform: translateX(-100rem);
+    transition: all 0.8s ease-in-out;
+    @include respond(sm) {
+      position: fixed;
+      background: $white-900;
+      z-index: 1000;
+      left: -100%;
+      padding: 0 1rem;
+    }
+    &.active {
+      transform: translateX(0);
+      width: 12.5rem;
+      @include respond(md) {
+        width: 11.25rem;
+      }
+      @include respond(sm) {
+        left: 0;
+        width: 100%;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__content {
+    padding: 2rem 1rem;
+    background-color: $white-900;
+    transition: all 0.8s ease-in-out;
+    will-change: width;
+    border-radius: 3rem;
+    height: fit-content;
+    width: 100%;
+
+    @include respond(md) {
+      border-radius: 2rem;
+    }
+    @include respond(sm) {
+      border-radius: 1rem;
+    }
+    &.active {
+      width: calc(100% - 12.5rem);
+      @include respond(sm) {
+        width: 100%;
+      }
+    }
+  }
+}

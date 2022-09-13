@@ -1,0 +1,73 @@
+.navbar {
+  box-shadow: 0 0.25rem 0.5rem -5px rgba($dark-900, 0.2);
+  &.hidden {
+    // display: none;
+  }
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.375rem;
+  }
+  &__logo {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+
+    img {
+      width: 3rem;
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    gap: 1rem;
+    height: inherit;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+
+  &__navigation-item {
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    font-size: inherit;
+
+    // menu div put some custom style on it
+    &.menu {
+      font-size: 2rem;
+    }
+    // search div put some custom style on it
+    &.search {
+      font-size: 1.7rem;
+      position: relative;
+      padding-inline-end: 0.5rem;
+      &::before {
+        background-color: $dark-900;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-60%);
+        height: 85%;
+        width: 2px;
+        transition: all 0.4s ease-in-out;
+      }
+    }
+
+    &:hover,
+    &.active {
+      color: $clr-primary-hover;
+    }
+
+    &:hover::before {
+      background-color: $clr-primary-hover;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.shopping-cart {
+  position: relative;
+
+  &__btn {
+    display: block;
+    width: fit-content;
+    margin-inline-start: auto;
+    background-color: $clr-primary-hover;
+    color: $dark-900;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    margin-bottom: 2rem;
+    margin-inline-start: 2rem;
+  }
+}

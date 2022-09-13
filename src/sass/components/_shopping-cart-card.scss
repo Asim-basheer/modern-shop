@@ -1,0 +1,124 @@
+.shopping-cart-container {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  > div:not(:last-child) {
+    border-bottom: 1px solid rgba($dark-900, 0.5);
+    padding-bottom: 0.5rem;
+  }
+}
+
+button.btn {
+  @include respond(xs) {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.container-cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include respond(xs) {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    width: 100%;
+    > div {
+      flex-basis: 50%;
+    }
+
+    > button:last-child {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.shopping-cart-card {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 0.1fr 0.4fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  //   text-align: center;
+
+  @include respond(xs) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__img {
+    @include respond(xs) {
+      margin: auto;
+    }
+  }
+
+  &__name {
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  &__price,
+  &__count,
+  &__total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: capitalize;
+
+    > span {
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+    @include respond(xs) {
+      align-items: flex-start;
+    }
+  }
+
+  &__count {
+    > div {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    button {
+      padding: 0.4rem 0.5rem;
+      background-color: transparent;
+      border: 1px solid rgba($dark-900, 0.5);
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        background-color: $dark-900;
+        color: $white-900;
+      }
+    }
+  }
+
+  &__control {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+
+    @include respond(xs) {
+      background-color: rgba(red, 0.8);
+      color: $white-900;
+      padding: 0.2rem 0.4rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    &:hover {
+      color: rgba(red, 0.8);
+
+      @include respond(xs) {
+        color: $white-900;
+        background-color: rgba(red, 0.4);
+      }
+    }
+  }
+}

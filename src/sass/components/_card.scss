@@ -1,0 +1,179 @@
+.card {
+  &__body {
+    background-color: $grey-700;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  &__img {
+    transform: scale(0.85);
+    transition: all 0.4s ease-in-out;
+    padding: 1rem;
+    margin: auto;
+  }
+
+  &__add-to-cart {
+    position: absolute;
+    width: 100%;
+    bottom: -100%;
+    background: $white-900;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.7s 0.1s ease;
+    // bottom: 100%;
+  }
+
+  &__full-screen {
+    background: transparent;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      color: $clr-primary-hover;
+    }
+  }
+
+  //   hover actions
+  &__body:hover img {
+    transform: scale(1);
+  }
+
+  &__body:hover &__add-to-cart {
+    bottom: 0;
+  }
+
+  &__title {
+    h3 {
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+  }
+
+  &__details {
+    height: fit-content;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    user-select: none;
+    z-index: -1;
+
+    width: 43.75rem;
+
+    @include respond(md) {
+      width: calc(100% - 10rem);
+    }
+    @include respond(xs) {
+      width: calc(100% - 2rem);
+    }
+
+    @include respond(xl) {
+      width: 50rem;
+    }
+
+    &.active {
+      opacity: 1;
+      top: 50%;
+      user-select: auto;
+      z-index: 500;
+    }
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba($dark-900, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0;
+    user-select: none;
+    &.active {
+      opacity: 1;
+      z-index: 490;
+    }
+  }
+}
+
+//  details styling ofc there will be a lot of styling hehe :)
+.card-details {
+  background-color: $white-900;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: column;
+  grid-auto-columns: 0.5fr 1fr;
+  align-items: center;
+
+  @include respond(sm) {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  &__img {
+    border-right: 1px solid rgba($dark-900, 0.5);
+    padding-inline-end: calc(2rem - 1px);
+
+    @include respond(sm) {
+      border-right: none;
+      padding-inline-end: 0;
+    }
+
+    @include respond(xs) {
+      max-width: 12.5rem;
+    }
+    img {
+      margin: auto;
+    }
+  }
+  &__name {
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: rgba($dark-900, 0.8);
+  }
+
+  &__ratting {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($dark-900, 0.5);
+  }
+
+  &__close {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      color: rgba(red, 0.7);
+    }
+  }
+}
+
+.rating {
+  span:last-child {
+    margin-inline-start: 0.4rem;
+  }
+  svg {
+    transform: translateY(2px);
+  }
+}
