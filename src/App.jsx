@@ -47,7 +47,7 @@ const App = () => {
     }
   };
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='shop'>
       <Navbar
         menuToggle={menuToggle}
         setMenuToggle={setMenuToggle}
