@@ -1,5 +1,5 @@
 import CardsContainer from '../components/CardsContainer';
-const OtherScreens = ({ heading, data, addToCart }) => {
+const OtherScreens = ({ heading, data, addToCart, cartItems }) => {
   return (
     <section>
       <div className='heading-container'>
@@ -9,7 +9,12 @@ const OtherScreens = ({ heading, data, addToCart }) => {
         </p>
       </div>
 
-      <CardsContainer heading={heading} data={data} addToCart={addToCart} />
+      <CardsContainer
+        heading={heading}
+        data={data}
+        addToCart={addToCart}
+        cartItems={cartItems}
+      />
     </section>
   );
 };

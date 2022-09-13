@@ -3,10 +3,12 @@ import { BsArrowsFullscreen } from 'react-icons/bs';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import Rating from '../Rating';
 
-const Card = ({ product, data, addToCart }) => {
+const Card = ({ product, addToCart, cartItems }) => {
   const [showDetails, setShowDetails] = useState(false);
 
-  const { des, id, image, isAdded, name, price, rating, reviews } = product;
+  const { id, des, image, name, price, rating, reviews } = product;
+
+  const filtered = cartItems.filter((p) => p.id === product.id)[0];
 
   return (
     <article className='card'>
@@ -14,14 +16,25 @@ const Card = ({ product, data, addToCart }) => {
         <img src={image} alt='product' className='card__img' />
 
         <div className='card__add-to-cart'>
-          <button
-            className='card__btn btn sm'
-            onClick={() => {
-              addToCart(product);
-            }}
-          >
-            add to cart
-          </button>
+          {filtered?.id === id ? (
+            <button
+              className={`'card__btn btn sm disabled`}
+              onClick={() => {
+                addToCart(product);
+              }}
+            >
+              add to cart
+            </button>
+          ) : (
+            <button
+              className={`'card__btn btn sm`}
+              onClick={() => {
+                addToCart(product);
+              }}
+            >
+              add to cart
+            </button>
+          )}
           <button
             className='card__full-screen'
             onClick={() => setShowDetails(!showDetails)}
@@ -47,14 +60,25 @@ const Card = ({ product, data, addToCart }) => {
           <div className='card-details__ratting'>
             <Rating value={rating} text={`${reviews} reviews`} />
           </div>
-          <button
-            className='btn sm'
-            onClick={() => {
-              addToCart(product);
-            }}
-          >
-            add to cart
-          </button>
+          {filtered?.id === id ? (
+            <button
+              className={`'card__btn btn sm disabled`}
+              onClick={() => {
+                addToCart(product);
+              }}
+            >
+              add to cart
+            </button>
+          ) : (
+            <button
+              className={`'card__btn btn sm`}
+              onClick={() => {
+                addToCart(product);
+              }}
+            >
+              add to cart
+            </button>
+          )}
 
           <button
             className='card-details__close'

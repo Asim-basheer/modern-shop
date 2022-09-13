@@ -1,6 +1,6 @@
 import Card from './Card';
 
-const index = ({ heading, data, addToCart }) => {
+const index = ({ heading, data, addToCart, cartItems }) => {
   return (
     <>
       <h2 className='sub-heading text-cap'>{heading}</h2>
@@ -12,6 +12,7 @@ const index = ({ heading, data, addToCart }) => {
               product={product}
               addToCart={addToCart}
               data={data}
+              cartItems={cartItems}
             />
           );
         })}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 
 // styles
-
+import 'react-toastify/dist/ReactToastify.css';
 import './sass/main.scss';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

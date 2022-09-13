@@ -7,9 +7,17 @@ import NavigationAside from './components/NavigationAside';
 import ShoppingCart from './components/ShoppingCart';
 import OtherScreens from './screens/OtherScreens';
 import { data } from './components/data';
+import Loading from './components/Loading';
+
+import { ToastContainer, toast } from 'react-toastify';
 const App = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem('cart'))
+      ? JSON.parse(localStorage.getItem('cart'))
+      : []
+  );
+  const [loading, setLoading] = useState(false);
   const menData = data.filter((d) => d.category === 'men');
   const womenData = data.filter((d) => d.category === 'women');
   const kidsData = data.filter((d) => d.category === 'kids');
@@ -21,31 +29,66 @@ const App = () => {
     if (exist) {
       return;
     } else {
-      setCartItems([...cartItems, { ...product, amount: 1 }]);
+      setLoading(true);
+      setCartItems((prevState) => {
+        const arr = [...prevState, { ...product, amount: 1 }];
+        localStorage.setItem('cart', JSON.stringify(arr));
+        return arr;
+      });
+      setTimeout(() => {
+        setLoading(false);
+      }, 200);
+
+      toast.success(`${product.name} added to your shopping cart`);
     }
   };
 
   const cartHandler = (product, type) => {
     if (type === 'increment') {
-      setCartItems(
-        cartItems.map((x) =>
+      setCartItems((prevState) => {
+        const value = prevState.map((x) =>
           x.id === product.id ? { ...product, amount: product.amount + 1 } : x
-        )
-      );
+        );
+
+        localStorage.setItem('cart', JSON.stringify(value));
+        return value;
+      });
     } else if (type === 'decrement') {
       if (product.amount === 1) {
-        setCartItems(cartItems.filter((x) => x.id !== product.id));
+        setLoading(true);
+        setCartItems((prevState) => {
+          const filteredData = prevState.filter((x) => x.id !== product.id);
+          localStorage.setItem('cart', JSON.stringify(filteredData));
+          return filteredData;
+        });
+        setTimeout(() => {
+          setLoading(false);
+        }, 200);
+        toast.success(`${product.name} removed from your shopping cart`);
       } else {
-        setCartItems(
-          cartItems.map((x) =>
+        setCartItems((prevState) => {
+          const value = prevState.map((x) =>
             x.id === product.id ? { ...product, amount: product.amount - 1 } : x
-          )
-        );
+          );
+
+          localStorage.setItem('cart', JSON.stringify(value));
+          return value;
+        });
       }
     } else {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      setCartItems((prevState) => {
+        const filteredData = prevState.filter((x) => x.id !== product.id);
+        localStorage.setItem('cart', JSON.stringify(filteredData));
+        return filteredData;
+      });
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 200);
+      toast.success(`${product.name} removed from your shopping cart`);
     }
   };
+
   return (
     <BrowserRouter basename='/'>
       <Navbar
@@ -53,6 +96,7 @@ const App = () => {
         setMenuToggle={setMenuToggle}
         inCart={cartItems.length}
       />
+      {loading && <Loading />}
       <main>
         <Container classes='page-container'>
           <NavigationAside
@@ -68,6 +112,8 @@ const App = () => {
                     heading={'home all categories'}
                     data={data.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -78,6 +124,8 @@ const App = () => {
                     heading={'men category'}
                     data={menData.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -88,6 +136,8 @@ const App = () => {
                     heading={'women category'}
                     data={womenData.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -98,6 +148,8 @@ const App = () => {
                     heading={'kids category'}
                     data={kidsData.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -108,6 +160,8 @@ const App = () => {
                     heading={'bags category'}
                     data={bagsData.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -118,6 +172,8 @@ const App = () => {
                     heading={'shoes category'}
                     data={shoesData.slice(0, 50)}
                     addToCart={addToCart}
+                    loading={loading}
+                    cartItems={cartItems}
                   />
                 }
               />
@@ -136,6 +192,8 @@ const App = () => {
           </Content>
         </Container>
       </main>
+
+      <ToastContainer />
     </BrowserRouter>
   );
 };
