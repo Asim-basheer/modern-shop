@@ -33,11 +33,21 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
         })}
       </div>
 
-      <h3 className='text-cap'>
-        <span>total:</span>
-        <span className='fw-regular'> ${total}</span>
-      </h3>
-      <button className='btn'>check out</button>
+      {cartItems.length > 0 && (
+        <h3 className='text-cap'>
+          <span>total:</span>
+          <span className='fw-regular'> ${total}</span>
+        </h3>
+      )}
+      <div className='shopping-cart__btn-container'>
+        <button
+          className={`btn warning ${cartItems.length === 0 && 'disabled'}`}
+          onClick={() => cartHandler([], 'empty')}
+        >
+          empty cart
+        </button>
+        <button className='btn'>check out</button>
+      </div>
     </aside>
   );
 };

@@ -17,6 +17,7 @@ const App = () => {
       ? JSON.parse(localStorage.getItem('cart'))
       : []
   );
+  const [dataAfterSearch, setDataAfterSearch] = useState([]);
   const [loading, setLoading] = useState(false);
   const menData = data.filter((d) => d.category === 'men');
   const womenData = data.filter((d) => d.category === 'women');
@@ -75,6 +76,16 @@ const App = () => {
           return value;
         });
       }
+    } else if (type === 'empty') {
+      const confirm =
+        cartItems.length > 0
+          ? window.confirm('are you sure want to clear your shopping cart?')
+          : false;
+      if (confirm) {
+        setCartItems(product);
+        localStorage.removeItem('cart');
+        toast.success('your shopping cart is empty');
+      }
     } else {
       setCartItems((prevState) => {
         const filteredData = prevState.filter((x) => x.id !== product.id);
@@ -89,12 +100,20 @@ const App = () => {
     }
   };
 
+  const searchHandler = (name) => {
+    const filter = data
+      .slice(0, 200)
+      .filter((p) => p.name.toLowerCase().startsWith(name.toLowerCase()));
+    setDataAfterSearch(filter);
+  };
+
   return (
     <BrowserRouter basename='/'>
       <Navbar
         menuToggle={menuToggle}
         setMenuToggle={setMenuToggle}
         inCart={cartItems.length}
+        searchHandler={searchHandler}
       />
       {loading && <Loading />}
       <main>
@@ -110,7 +129,11 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'home all categories'}
-                    data={data.slice(0, 50)}
+                    data={
+                      dataAfterSearch.length > 0
+                        ? dataAfterSearch
+                        : data.slice(0, 200)
+                    }
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -122,7 +145,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'men category'}
-                    data={menData.slice(0, 50)}
+                    data={menData.slice(0, 200)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -134,7 +157,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'women category'}
-                    data={womenData.slice(0, 50)}
+                    data={womenData.slice(0, 200)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -146,7 +169,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'kids category'}
-                    data={kidsData.slice(0, 50)}
+                    data={kidsData.slice(0, 200)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -158,7 +181,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'bags category'}
-                    data={bagsData.slice(0, 50)}
+                    data={bagsData.slice(0, 200)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -170,7 +193,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'shoes category'}
-                    data={shoesData.slice(0, 50)}
+                    data={shoesData.slice(0, 200)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}

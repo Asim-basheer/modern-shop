@@ -2,11 +2,21 @@ import Container from './Container';
 
 import { BiSearch, BiMenu } from 'react-icons/bi';
 import { GiShoppingCart } from 'react-icons/gi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import Search from './Search';
+import { useState } from 'react';
 
-const Navbar = ({ menuToggle, setMenuToggle, inCart }) => {
+const Navbar = ({ menuToggle, setMenuToggle, inCart, searchHandler }) => {
+  const { pathname } = useLocation();
+  const [searchToggle, setSearchToggle] = useState(false);
+  const navigate = useNavigate();
+
+  const backToHome = () => {
+    setMenuToggle(false);
+    navigate('/');
+  };
   return (
-    <nav className={`navbar bg-grey-700`}>
+    <nav className={`navbar bg-grey-700 ${pathname === '/cart' && 'hidden'}`}>
       <Container classes='navbar__container'>
         <NavLink to={'/'} className='navbar__logo'>
           <img
@@ -16,8 +26,14 @@ const Navbar = ({ menuToggle, setMenuToggle, inCart }) => {
           <p className='text-cap fw-bold'>modern shop</p>
         </NavLink>
         <div className='navbar__navigation'>
-          <button className='navbar__navigation-item search'>
-            <BiSearch />
+          <button
+            className={`navbar__navigation-item search ${
+              searchToggle && 'active'
+            }`}
+            onClick={backToHome}
+          >
+            <Search searchHandler={searchHandler} />
+            <BiSearch onClick={() => setSearchToggle(!searchToggle)} />
           </button>
           <NavLink
             to={'/cart'}
