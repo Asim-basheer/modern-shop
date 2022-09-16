@@ -66,36 +66,6 @@ const NavigationAside = ({ menuToggle, setMenuToggle }) => {
               <span>kids</span>
             </NavLink>
           </li>
-          <li
-            className='navigation-aside__item'
-            onClick={() => setMenuToggle(!menuToggle)}
-          >
-            <NavLink
-              to='/bags'
-              className='navigation-aside__link fw-semibold text-cap'
-            >
-              <img
-                src='https://ik.imagekit.io/ievdkoh2e/shop_website/bag-svgrepo-com_1_JsUdT0b-C.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1662915834051'
-                alt='bags icon'
-              />
-              <span>bags</span>
-            </NavLink>
-          </li>
-          <li
-            className='navigation-aside__item'
-            onClick={() => setMenuToggle(!menuToggle)}
-          >
-            <NavLink
-              to='/shoes'
-              className='navigation-aside__link fw-semibold text-cap'
-            >
-              <img
-                src='https://ik.imagekit.io/ievdkoh2e/shop_website/shoes-shoe-svgrepo-com_1_tQqMkDa5Y.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1662915834686'
-                alt='shoes icon'
-              />
-              <span>shoes</span>
-            </NavLink>
-          </li>
         </ul>
       </nav>
     </aside>

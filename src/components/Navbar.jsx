@@ -1,6 +1,6 @@
 import Container from './Container';
 
-import { BiSearch, BiMenu } from 'react-icons/bi';
+import { BiMenu } from 'react-icons/bi';
 import { GiShoppingCart } from 'react-icons/gi';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Search from './Search';
@@ -25,16 +25,8 @@ const Navbar = ({ menuToggle, setMenuToggle, inCart, searchHandler }) => {
           />
           <p className='text-cap fw-bold'>modern shop</p>
         </NavLink>
+        <Search searchHandler={searchHandler} setMenuToggle={setMenuToggle} />
         <div className='navbar__navigation'>
-          <button
-            className={`navbar__navigation-item search ${
-              searchToggle && 'active'
-            }`}
-            onClick={backToHome}
-          >
-            <Search searchHandler={searchHandler} />
-            <BiSearch onClick={() => setSearchToggle(!searchToggle)} />
-          </button>
           <NavLink
             to={'/cart'}
             className='navbar__navigation-item'
@@ -42,7 +34,9 @@ const Navbar = ({ menuToggle, setMenuToggle, inCart, searchHandler }) => {
           >
             <GiShoppingCart />
 
-            <div>{inCart > 0 && inCart}</div>
+            <div style={{ marginInlineStart: '3px' }}>
+              {inCart > 0 && inCart}
+            </div>
           </NavLink>
           <button
             className='navbar__navigation-item menu'

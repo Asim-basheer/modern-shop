@@ -10,11 +10,16 @@
     transform: translateX(-100rem);
     transition: all 0.8s ease-in-out;
     @include respond(sm) {
-      position: fixed;
-      background: $white-900;
-      z-index: 1000;
+      position: absolute;
+      top: 0;
       left: -100%;
+      z-index: 1000;
       padding: 0 1rem;
+      background: $grey-500;
+      border-bottom: 2px solid $clr-primary-hover;
+      border-top: 2px solid $clr-primary-hover;
+    }
+    @include respond(xs) {
     }
     &.active {
       transform: translateX(0);

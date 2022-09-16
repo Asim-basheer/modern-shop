@@ -8,6 +8,14 @@
     justify-content: space-between;
     align-items: center;
     height: 4.375rem;
+
+    @include respond(xs) {
+      height: auto;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
   }
   &__logo {
     display: flex;
@@ -16,14 +24,15 @@
     gap: 0.5rem;
     font-size: 1.3rem;
 
+    @include respond(xs) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     img {
       width: 3rem;
     }
 
     > p {
-      @include respond(xs) {
-        display: none;
-      }
     }
   }
 

@@ -18,12 +18,12 @@ const App = () => {
       : []
   );
   const [dataAfterSearch, setDataAfterSearch] = useState([]);
+  const [searchResult, setSearchResult] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const menData = data.filter((d) => d.category === 'men');
   const womenData = data.filter((d) => d.category === 'women');
   const kidsData = data.filter((d) => d.category === 'kids');
-  const bagsData = data.filter((d) => d.category === 'bags');
-  const shoesData = data.filter((d) => d.category === 'shoes');
 
   const addToCart = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -102,9 +102,16 @@ const App = () => {
 
   const searchHandler = (name) => {
     const filter = data
-      .slice(0, 200)
+      .slice(0, 30)
       .filter((p) => p.name.toLowerCase().startsWith(name.toLowerCase()));
-    setDataAfterSearch(filter);
+
+    if (filter.length === 0) {
+      setSearchResult(true);
+      setDataAfterSearch([]);
+    } else if (filter.length > 0) {
+      setDataAfterSearch(filter);
+      setSearchResult(false);
+    }
   };
 
   return (
@@ -127,17 +134,36 @@ const App = () => {
               <Route
                 path=''
                 element={
-                  <OtherScreens
-                    heading={'home all categories'}
-                    data={
-                      dataAfterSearch.length > 0
-                        ? dataAfterSearch
-                        : data.slice(0, 200)
-                    }
-                    addToCart={addToCart}
-                    loading={loading}
-                    cartItems={cartItems}
-                  />
+                  <>
+                    {dataAfterSearch.length === 0 && searchResult === true ? (
+                      <OtherScreens
+                        heading='no result to show'
+                        data={[]}
+                        addToCart={addToCart}
+                        loading={loading}
+                        cartItems={cartItems}
+                      />
+                    ) : (
+                      <OtherScreens
+                        heading={`${
+                          dataAfterSearch.length > 0
+                            ? data.slice(0, 30).length ===
+                              dataAfterSearch.length
+                              ? 'home all categories'
+                              : 'search in all categories'
+                            : 'home in all categories'
+                        }`}
+                        data={
+                          dataAfterSearch.length > 0
+                            ? dataAfterSearch
+                            : data.slice(0, 30)
+                        }
+                        addToCart={addToCart}
+                        loading={loading}
+                        cartItems={cartItems}
+                      />
+                    )}
+                  </>
                 }
               />
               <Route
@@ -145,7 +171,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'men category'}
-                    data={menData.slice(0, 200)}
+                    data={menData.slice(0, 30)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -157,7 +183,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'women category'}
-                    data={womenData.slice(0, 200)}
+                    data={womenData.slice(0, 30)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -169,31 +195,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'kids category'}
-                    data={kidsData.slice(0, 200)}
-                    addToCart={addToCart}
-                    loading={loading}
-                    cartItems={cartItems}
-                  />
-                }
-              />
-              <Route
-                path='bags'
-                element={
-                  <OtherScreens
-                    heading={'bags category'}
-                    data={bagsData.slice(0, 200)}
-                    addToCart={addToCart}
-                    loading={loading}
-                    cartItems={cartItems}
-                  />
-                }
-              />
-              <Route
-                path='shoes'
-                element={
-                  <OtherScreens
-                    heading={'shoes category'}
-                    data={shoesData.slice(0, 200)}
+                    data={kidsData.slice(0, 30)}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
