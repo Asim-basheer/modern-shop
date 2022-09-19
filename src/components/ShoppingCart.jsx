@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ShoppingCartCard from './ShoppingCartCard';
-
+import { useReactToPrint } from 'react-to-print';
 const ShoppingCart = ({ cartHandler, cartItems }) => {
   const total = cartItems
     .reduce((accumulator, object) => {
@@ -8,8 +9,15 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
     }, 0)
     .toFixed(2);
 
+  const shoppingCartItemsRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => shoppingCartItemsRef.current,
+    documentTitle: 'your_shopping_cart',
+    onAfterPrint: () => alert('thank you for shopping from us'),
+  });
   return (
-    <aside className='shopping-cart'>
+    <aside className='shopping-cart' ref={shoppingCartItemsRef}>
       <Link to='/' className='btn shopping-cart__btn'>
         back to home
       </Link>
@@ -46,7 +54,9 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
         >
           empty cart
         </button>
-        <button className='btn'>check out</button>
+        <button className='btn' onClick={handlePrint}>
+          check out
+        </button>
       </div>
     </aside>
   );

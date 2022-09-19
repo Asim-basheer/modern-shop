@@ -61,6 +61,12 @@
   margin-inline-end: 1rem;
 }
 
+.on-print-only {
+  @media print {
+    display: none;
+  }
+}
+
 .btn {
   padding: 0.5rem 1rem;
   font-weight: 700;
@@ -70,6 +76,11 @@
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
+
+  @media print {
+    opacity: 0;
+  }
+
   &.sm {
     font-size: 0.8rem;
     padding: 0.6rem 1rem;

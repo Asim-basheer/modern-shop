@@ -90,6 +90,7 @@ button.btn {
       cursor: pointer;
       font-size: 1.4rem;
       transition: all 0.4s ease-in-out;
+
       &:hover {
         background-color: $dark-900;
         color: $white-900;
@@ -103,6 +104,11 @@ button.btn {
     font-size: 1.8rem;
     cursor: pointer;
     transition: all 0.4s ease-in-out;
+
+    display: none;
+    @media print {
+      display: none;
+    }
 
     @include respond(xs) {
       background-color: rgba(red, 0.8);

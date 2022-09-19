@@ -7,7 +7,7 @@ const ShoppingCartCard = ({ product, cartHandler }) => {
 
   return (
     <div className='shopping-cart-card'>
-      <div className='shopping-cart-card__img'>
+      <div className='shopping-cart-card__img on-print-only'>
         <img src={image} alt='product view' />
       </div>
       <div className='shopping-cart-card__name'>{name}</div>
@@ -15,9 +15,19 @@ const ShoppingCartCard = ({ product, cartHandler }) => {
         <div className='shopping-cart-card__count'>
           <span>amount</span>
           <div>
-            <button onClick={() => cartHandler(product, 'decrement')}>-</button>
+            <button
+              className='on-print-only'
+              onClick={() => cartHandler(product, 'decrement')}
+            >
+              -
+            </button>
             {amount}
-            <button onClick={() => cartHandler(product, 'increment')}>+</button>
+            <button
+              className='on-print-only'
+              onClick={() => cartHandler(product, 'increment')}
+            >
+              +
+            </button>
           </div>
         </div>
         <div className='shopping-cart-card__price'>
@@ -27,7 +37,7 @@ const ShoppingCartCard = ({ product, cartHandler }) => {
           <span>total</span> ${total}
         </div>
         <button
-          className='shopping-cart-card__control'
+          className='shopping-cart-card__control on-print-only'
           onClick={() => cartHandler(product)}
         >
           <AiFillDelete />
