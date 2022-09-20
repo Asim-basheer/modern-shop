@@ -61,12 +61,6 @@
   margin-inline-end: 1rem;
 }
 
-.on-print-only {
-  @media print {
-    display: none;
-  }
-}
-
 .btn {
   padding: 0.5rem 1rem;
   font-weight: 700;
