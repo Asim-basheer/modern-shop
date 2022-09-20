@@ -1,7 +1,7 @@
 import { AiFillDelete } from 'react-icons/ai';
 
 const ShoppingCartCard = ({ product, cartHandler }) => {
-  const { id, image, name, price, amount } = product;
+  const { image, name, price, amount } = product;
 
   const total = (price * amount).toFixed(1);
 

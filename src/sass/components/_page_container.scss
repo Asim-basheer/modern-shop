@@ -1,9 +1,9 @@
 .page-container {
   display: flex;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   position: relative;
   overflow: hidden;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   &__aside {
     padding-top: 2rem;
     width: 0;
@@ -43,7 +43,6 @@
     border-radius: 3rem;
     height: fit-content;
     width: 100%;
-
     @include respond(md) {
       border-radius: 2rem;
     }

@@ -2,19 +2,12 @@ import Container from './Container';
 
 import { BiMenu } from 'react-icons/bi';
 import { GiShoppingCart } from 'react-icons/gi';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Search from './Search';
-import { useState } from 'react';
 
 const Navbar = ({ menuToggle, setMenuToggle, inCart, searchHandler }) => {
   const { pathname } = useLocation();
-  const [searchToggle, setSearchToggle] = useState(false);
-  const navigate = useNavigate();
 
-  const backToHome = () => {
-    setMenuToggle(false);
-    navigate('/');
-  };
   return (
     <nav className={`navbar bg-grey-700 ${pathname === '/cart' && 'hidden'}`}>
       <Container classes='navbar__container'>

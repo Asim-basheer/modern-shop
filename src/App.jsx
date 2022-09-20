@@ -8,8 +8,9 @@ import ShoppingCart from './components/ShoppingCart';
 import OtherScreens from './screens/OtherScreens';
 import { data } from './components/data';
 import Loading from './components/Loading';
-
 import { ToastContainer, toast } from 'react-toastify';
+
+import Footer from './components/Footer';
 const App = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [cartItems, setCartItems] = useState(
@@ -38,7 +39,7 @@ const App = () => {
       });
       setTimeout(() => {
         setLoading(false);
-      }, 200);
+      }, 500);
 
       toast.success(`${product.name} added to your shopping cart`);
     }
@@ -64,7 +65,7 @@ const App = () => {
         });
         setTimeout(() => {
           setLoading(false);
-        }, 200);
+        }, 500);
         toast.success(`${product.name} removed from your shopping cart`);
       } else {
         setCartItems((prevState) => {
@@ -98,15 +99,15 @@ const App = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 200);
+      }, 500);
       toast.success(`${product.name} removed from your shopping cart`);
     }
   };
 
   const searchHandler = (name) => {
-    const filter = data
-      .slice(0, 30)
-      .filter((p) => p.name.toLowerCase().includes(name.toLowerCase()));
+    const filter = data.filter((p) =>
+      p.name.toLowerCase().includes(name.toLowerCase())
+    );
 
     if (filter.length === 0) {
       setSearchResult(true);
@@ -150,16 +151,13 @@ const App = () => {
                       <OtherScreens
                         heading={`${
                           dataAfterSearch.length > 0
-                            ? data.slice(0, 30).length ===
-                              dataAfterSearch.length
+                            ? data.length === dataAfterSearch.length
                               ? 'home all categories'
                               : 'search in all categories'
                             : 'home in all categories'
                         }`}
                         data={
-                          dataAfterSearch.length > 0
-                            ? dataAfterSearch
-                            : data.slice(0, 30)
+                          dataAfterSearch.length > 0 ? dataAfterSearch : data
                         }
                         addToCart={addToCart}
                         loading={loading}
@@ -174,7 +172,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'men category'}
-                    data={menData.slice(0, 30)}
+                    data={menData}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -186,7 +184,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'women category'}
-                    data={womenData.slice(0, 30)}
+                    data={womenData}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -198,7 +196,7 @@ const App = () => {
                 element={
                   <OtherScreens
                     heading={'kids category'}
-                    data={kidsData.slice(0, 30)}
+                    data={kidsData}
                     addToCart={addToCart}
                     loading={loading}
                     cartItems={cartItems}
@@ -220,7 +218,7 @@ const App = () => {
           </Content>
         </Container>
       </main>
-
+      <Footer />
       <ToastContainer />
     </BrowserRouter>
   );
