@@ -86,6 +86,9 @@ const App = () => {
         localStorage.removeItem('cart');
         toast.success('your shopping cart is empty');
       }
+    } else if (type === 'empty-after-print') {
+      setCartItems(product);
+      localStorage.removeItem('cart');
     } else {
       setCartItems((prevState) => {
         const filteredData = prevState.filter((x) => x.id !== product.id);
@@ -103,7 +106,7 @@ const App = () => {
   const searchHandler = (name) => {
     const filter = data
       .slice(0, 30)
-      .filter((p) => p.name.toLowerCase().startsWith(name.toLowerCase()));
+      .filter((p) => p.name.toLowerCase().includes(name.toLowerCase()));
 
     if (filter.length === 0) {
       setSearchResult(true);

@@ -15,7 +15,7 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
   const handlePrint = useReactToPrint({
     content: () => shoppingCartItemsRef.current,
     documentTitle: 'your_shopping_cart',
-    onAfterPrint: () => alert('thank you for shopping from us'),
+    onAfterPrint: () => cartHandler([], 'empty-after-print'),
   });
   return (
     <aside className='shopping-cart'>
@@ -55,9 +55,14 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
         >
           empty cart
         </button>
-        <button className='btn' onClick={handlePrint}>
-          check out
-        </button>
+
+        {cartItems.length === 0 ? (
+          <button className='btn disabled'>check out</button>
+        ) : (
+          <button className='btn' onClick={handlePrint}>
+            check out
+          </button>
+        )}
       </div>
 
       <Receipt

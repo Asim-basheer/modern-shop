@@ -38,7 +38,11 @@
     display: flex;
     align-items: center;
     > div {
-      width: calc(100% / 3);
+      width: calc(50% / 2);
+    }
+
+    > div:nth-child(1) {
+      width: 50%;
     }
 
     &:not(:last-child) {
