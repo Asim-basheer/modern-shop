@@ -12,11 +12,16 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
 
   const shoppingCartItemsRef = useRef();
 
+  const afterOrder = () => {
+    window.alert('Thank for the order from Modern Shop');
+    cartHandler([], 'empty-after-print');
+  };
   const handlePrint = useReactToPrint({
     content: () => shoppingCartItemsRef.current,
     documentTitle: 'your_shopping_cart',
-    onAfterPrint: () => cartHandler([], 'empty-after-print'),
+    onAfterPrint: () => afterOrder(),
   });
+
   return (
     <aside className='shopping-cart'>
       <Link to='/' className='btn shopping-cart__btn'>

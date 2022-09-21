@@ -14,7 +14,6 @@ const Search = ({ searchHandler, setMenuToggle }) => {
       <input
         type='text'
         className='search-form__input'
-        autoFocus
         onChange={handleChange}
         placeholder='Search by name'
       />

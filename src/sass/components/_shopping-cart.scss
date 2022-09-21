@@ -7,6 +7,10 @@
     margin-inline-start: auto;
     margin-inline-end: 2rem;
     margin-bottom: 2rem;
+
+    @include respond(xs) {
+      margin-inline-end: 0;
+    }
   }
 
   h3 {

@@ -11,6 +11,7 @@ import Loading from './components/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Footer from './components/Footer';
+import { useEffect } from 'react';
 const App = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [cartItems, setCartItems] = useState(
@@ -117,6 +118,16 @@ const App = () => {
       setSearchResult(false);
     }
   };
+
+  useEffect(() => {
+    window.onload = () => {
+      setLoading(true);
+    };
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
 
   return (
     <BrowserRouter basename='/'>
