@@ -1,39 +1,74 @@
-const Receipt = ({ cartItems, total, shoppingCartItemsRef }) => {
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+function Receipt({ total, setPopUp, popUp }) {
+  const totalPlusFees = Number(total) + 13.99;
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const year = new Date().getFullYear(),
+    month = new Date().getMonth(),
+    day = new Date().getDate();
+
   return (
-    <div className='receipt fs-bold' ref={shoppingCartItemsRef}>
-      <div className='receipt__logo'>
-        <img
-          src='https://ik.imagekit.io/ievdkoh2e/shop_website/prestashop-logo-svgrepo-com_1_fYsla3_nJj.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1662911398113'
-          alt='logo'
-        />
-        <p className='text-cap fw-bold'>modern shop</p>
+    <div className={`receipt ${popUp && 'receipt active'}`}>
+      <div
+        className={`receipt__overlay ${popUp && 'active'}`}
+        onClick={() => setPopUp(false)}
+      ></div>
+      <div className={`receipt__body ${popUp && 'active'}`}>
+        <div className='receipt__close' onClick={() => setPopUp(false)}>
+          <AiOutlineCloseCircle />
+        </div>
 
-        <h2>your receipt</h2>
+        <h2>
+          customer receipt
+          <span>your order is now completed</span>
+        </h2>
+
+        <div className='receipt__client-details'>
+          <div>
+            <span>client</span>
+            <span>john de</span>
+          </div>
+          <div>
+            <span>address</span>
+            <span>jordan 202</span>
+          </div>
+        </div>
+
+        <div className='receipt__date'>
+          <span>
+            {day} {monthNames[month]} {year}
+          </span>
+        </div>
+        <div className='receipt__details'>
+          <div>
+            <span>price</span>
+            <span>${total}</span>
+          </div>
+          <div>
+            <span>fees</span>
+            <span>$13.99</span>
+          </div>
+        </div>
+        <div className='receipt__total'>
+          <span>total</span>
+          <span>${totalPlusFees}</span>
+        </div>
       </div>
-
-      <div className='receipt__container'>
-        {cartItems.map((cart) => {
-          return (
-            <div className='receipt__box' key={cart.id}>
-              <div className='text-first-cap text-first-cap'>
-                name of the product: {cart.name}
-              </div>
-              <div className='text-first-cap'>quantity: {cart.amount}</div>
-              <div className='text-first-cap'>
-                total price: ${(cart.amount * cart.price).toFixed(2)}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className='fw-bold text-first-cap'>
-        total receipt price: ${total}
-      </div>
-
-      <div className='text-first-cap'>thank you for the order</div>
     </div>
   );
-};
+}
 
 export default Receipt;

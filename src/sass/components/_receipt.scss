@@ -1,56 +1,145 @@
 .receipt {
-  padding: 3rem;
-  font-size: 0.9rem;
-  display: none;
-
-  @media print {
-    display: block;
+  user-select: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  &.active {
+    visibility: visible;
+    user-select: auto;
+    opacity: 1;
   }
-  &__logo {
-    font-size: 1.4rem;
+
+  &__overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($clr-primary-hover, 0.8);
+    backdrop-filter: blur(1px);
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  &__body {
+    max-width: 31.25rem;
+    min-width: 31.25rem;
+    position: fixed;
+    z-index: 10000;
+    padding: 3rem 4rem;
+    border-radius: 0.2rem;
+    background-color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: 0.3s;
+    @include respond(xs) {
+      min-width: 16.25rem;
+      padding: 1rem 1.5rem;
+    }
+
+    &.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: $clr-warning;
+    &:hover {
+      color: red;
+    }
+  }
+
+  h2 {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba($grey-700, 0.5);
+    padding-bottom: 1rem;
+    font-weight: 500;
+
+    @include respond(xs) {
+      font-size: 1.3rem;
+    }
+    span {
+      display: block;
+      font-weight: 400;
+      color: $grey-900;
+      font-size: 1.1rem;
+      margin-top: 0.2rem;
+      text-transform: lowercase;
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
+      @include respond(xs) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  &__client-details {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: 0.5rem;
+    flex-direction: column;
     margin-bottom: 1rem;
-    border-bottom: 1.5px solid $dark-900;
     padding-bottom: 1rem;
-
-    img {
-      width: 3rem;
+    border-bottom: 2px solid rgba($grey-700, 0.5);
+    div {
+      display: flex;
+      justify-content: space-between;
+      text-transform: capitalize;
     }
-
-    h2 {
-      width: fit-content;
-      margin: auto;
-      font-size: 1.6rem;
-      @extend .text-cap;
+    span:nth-child(1) {
+      color: #777;
     }
   }
 
-  &__container {
+  &__date {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1.5px solid $dark-900;
+    border-bottom: 2px solid rgba($grey-700, 0.5);
+    span {
+      text-transform: capitalize;
+      color: #777;
+    }
   }
 
-  &__box {
+  &__details {
     display: flex;
-    align-items: center;
-    > div {
-      width: calc(50% / 2);
+    gap: 0.5rem;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba($grey-700, 0.5);
+    div {
+      display: flex;
+      justify-content: space-between;
+      text-transform: capitalize;
     }
-
-    > div:nth-child(1) {
-      width: 50%;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
+    span:nth-child(1) {
+      color: #777;
     }
   }
 
-  > div:last-child {
-    margin-top: 1rem;
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+    span:nth-child(1) {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    span:nth-child(2) {
+      color: #62c934;
+      font-size: 1.4rem;
+    }
   }
 }
