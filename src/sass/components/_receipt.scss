@@ -36,7 +36,7 @@
     transform: translate(-50%, -50%) scale(0.9);
     transition: 0.3s;
     @include respond(xs) {
-      min-width: 16.25rem;
+      min-width: calc(100vw - 3rem);
       padding: 1rem 1.5rem;
     }
 
