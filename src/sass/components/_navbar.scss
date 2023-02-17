@@ -17,6 +17,36 @@
       gap: 1rem;
     }
   }
+
+  &__cart-icon {
+    position: relative;
+    z-index: 10;
+  }
+
+  &__cart-count {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-40%);
+    top: -40%;
+    font-size: 16px;
+    background: red;
+    min-width: 25px;
+    max-width: 50px;
+    min-height: 25px;
+    max-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.8rem;
+    z-index: 510;
+
+    @include respond(sm) {
+      top: -50%;
+    }
+  }
   &__logo {
     display: flex;
     align-items: center;
@@ -30,9 +60,6 @@
     }
     img {
       width: 3rem;
-    }
-
-    > p {
     }
   }
 
@@ -53,7 +80,7 @@
     cursor: pointer;
     transition: all 0.4s ease-in-out;
     font-size: inherit;
-
+    position: relative;
     // menu div put some custom style on it
     &.menu {
       font-size: 2rem;
@@ -76,7 +103,7 @@
       }
     }
 
-    &:hover,
+    &:hover:not(:first-child),
     &.active {
       color: $clr-primary-hover;
     }

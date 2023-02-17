@@ -3,12 +3,13 @@
   width: fit-content;
   margin: 0 auto;
   margin-bottom: 2rem;
-  font-weight: 900;
+
   &__heading {
     display: inline-block;
     margin-bottom: 0.5rem;
     line-height: 1;
-    font-size: 2.5rem;
+    font-size: 48px;
+    font-weight: 700;
 
     @include respond(xs) {
       font-size: 2rem;

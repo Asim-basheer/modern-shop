@@ -25,11 +25,11 @@ const Navbar = ({ menuToggle, setMenuToggle, inCart, searchHandler }) => {
             className='navbar__navigation-item'
             onClick={() => setMenuToggle(false)}
           >
-            <GiShoppingCart />
+            <GiShoppingCart className='navbar__cart-icon' />
 
-            <div style={{ marginInlineStart: '3px' }}>
-              {inCart > 0 && inCart}
-            </div>
+            {inCart > 0 && (
+              <div className='navbar__cart-count'>{inCart > 0 && inCart}</div>
+            )}
           </NavLink>
           <button
             className='navbar__navigation-item menu'

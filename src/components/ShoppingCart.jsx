@@ -18,7 +18,7 @@ const ShoppingCart = ({ cartHandler, cartItems }) => {
           back to home
         </Link>
         <div className='heading-container'>
-          <h1 className='heading-container__heading text-first-cap'>
+          <h1 className='heading-container__sub-heading text-first-cap'>
             {cartItems.length === 0
               ? 'your shopping cart is empty'
               : 'your shopping cart'}

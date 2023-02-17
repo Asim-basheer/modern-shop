@@ -29,7 +29,7 @@
     &.active,
     &:focus {
       background-color: $clr-primary-hover;
-
+      color: $white-900;
       &:hover {
         background-color: $clr-primary-hover;
       }

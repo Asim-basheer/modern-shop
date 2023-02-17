@@ -12,41 +12,41 @@ const Card = ({ product, addToCart, cartItems }) => {
 
   return (
     <article className='card'>
-      <div className='card__body'>
+      <div className='card__body' onClick={() => setShowDetails(!showDetails)}>
         <img src={image} alt='product' className='card__img' />
-
-        <div className='card__add-to-cart'>
-          {filtered?.id === id ? (
-            <button
-              className={`'card__btn btn sm disabled`}
-              onClick={() => {
-                addToCart(product);
-              }}
-            >
-              add to cart
-            </button>
-          ) : (
-            <button
-              className={`'card__btn btn sm`}
-              onClick={() => {
-                addToCart(product);
-              }}
-            >
-              add to cart
-            </button>
-          )}
-          <button
-            className='card__full-screen'
-            onClick={() => setShowDetails(!showDetails)}
-          >
-            <BsArrowsFullscreen />
-          </button>
-        </div>
       </div>
 
       <div className='card__title'>
         <h3 className='text-cap fw-semibold'>{name}</h3>
         <p>${price}</p>
+      </div>
+
+      <div className='card__add-to-cart'>
+        {filtered?.id === id ? (
+          <button
+            className={`'card__btn btn sm disabled`}
+            onClick={() => {
+              addToCart(product);
+            }}
+          >
+            add to cart
+          </button>
+        ) : (
+          <button
+            className={`'card__btn btn sm`}
+            onClick={() => {
+              addToCart(product);
+            }}
+          >
+            add to cart
+          </button>
+        )}
+        <button
+          className='card__full-screen'
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          <BsArrowsFullscreen />
+        </button>
       </div>
 
       <div className={`card__details card-details ${showDetails && 'active'}`}>

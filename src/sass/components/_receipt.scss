@@ -12,7 +12,7 @@
   &__overlay {
     width: 100vw;
     height: 100vh;
-    background-color: rgba($clr-primary-hover, 0.8);
+    background: rgba($dark-900, 0.5);
     backdrop-filter: blur(1px);
     position: fixed;
     left: 0;
@@ -35,6 +35,7 @@
     top: 50%;
     transform: translate(-50%, -50%) scale(0.9);
     transition: 0.3s;
+    border-radius: 1rem;
     @include respond(xs) {
       min-width: calc(100vw - 3rem);
       padding: 1rem 1.5rem;
@@ -51,9 +52,10 @@
     top: 1rem;
     font-size: 1.6rem;
     cursor: pointer;
-    color: $clr-warning;
+    color: red;
+    transition: all 0.3s ease-in-out;
     &:hover {
-      color: red;
+      opacity: 0.9;
     }
   }
 
